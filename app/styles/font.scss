@@ -1,0 +1,11 @@
+@font-face {
+  font-family: 'Roboto';
+  src: url('../fonts/Roboto-Regular.ttf');
+}
+@font-face {
+  font-family: 'Open-Sans';
+  src: url('../fonts/OpenSans-Regular.ttf');
+}
+
+$roboto: 'Roboto', sans-serif;
+$open-sans: 'Open-Sans', sans-serif;
