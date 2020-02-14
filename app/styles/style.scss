@@ -2,3 +2,50 @@
 @import "color";
 @import "base";
 
+
+.map-wrapper{
+  width: 100%;
+  height: 100vh;
+  cursor: grab;
+  .station-circle{
+    cursor: pointer;
+  }
+  .text-4g{
+    cursor: pointer;
+  }
+}
+#mapContainer{
+  overflow: hidden;
+}
+#mapSvg{
+  transition: .2s;
+}
+.line{
+  transition: 1s;
+}
+.line:hover{
+  fill: #cec130;
+}
+#subscribePopup{
+  background: white;
+  padding: 10px;
+  position: absolute;
+  width: 200px;
+  height: 100px;
+  border-radius: 5px;
+  z-index: 5;
+  display: none;
+}
+.text-4g{
+    font-weight:900;
+  }
+@keyframes change_fill {
+  0% { fill: #49549E; }
+  50% { fill: #cec130; }
+  100% { fill: #49549E; }
+}
+@keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
