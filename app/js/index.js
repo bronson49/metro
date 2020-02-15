@@ -26,9 +26,15 @@ const appMetro = {
         $(mapWrapper).draggable({
             start( event, ui ) {appMetro.setSubscribePopup({})},
         });
+        let clipController = null;
         stations.render().then(readyCords=>{
+
+            clipController = clipStations(readyCords);
+            clipController.start();
+        }).then(res=>{
+            clipController.appear();
+        }).then(res=>{
             this.events();
-            clipStations(readyCords).start();
         });
     },
 

@@ -1,5 +1,36 @@
+import Snap from 'snapsvg';
 
 const stations =  function () {
+
+    let mapSvg = document.getElementById('mapSvg');
+    let s = Snap("#mapSvg");
+
+    return {
+        render(){
+            return new Promise((resolve, reject)=>{
+                getAllStations().then(res=>{
+                    let readyCords = [];
+                    let openCounter = 0;
+                    res.forEach((item, index)=>{
+                        let stationCircle = $(`[data-name=${item.slug}]`);
+                        if (stationCircle.length){
+                            const inst = stationCircle[0];
+                            const instCords = {x: +inst.getAttribute('cx') , y: +inst.getAttribute('cy')};
+                            mapSvg.appendChild(stationNameTemplate(instCords.x, instCords.y, item.slug, item.title));
+                            if (item.status==='ready'){
+                                openCounter++;
+                                stationCircle.remove();
+                                openStationCircle(instCords.x, instCords.y, item.slug, item.id, openCounter);
+                                mapSvg.appendChild(openStation4gLabel(instCords.x, instCords.y) );
+                                readyCords.push({x:instCords.x, y: instCords.y})
+                            }
+                        }
+                    });
+                    resolve(readyCords)
+                });
+            });
+        },
+    };
 
 
     function getAllStations(){
@@ -17,7 +48,7 @@ const stations =  function () {
                 }
             });
         })
-    };
+    }
     function openStation4gLabel(x,y){
         let textTag = document.createElementNS('http://www.w3.org/2000/svg', 'text');
         textTag.setAttributeNS(null,'x',x-10);
@@ -27,8 +58,7 @@ const stations =  function () {
         let text = document.createTextNode('4G');
         textTag.appendChild(text);
         return textTag
-        //return `<text x="${x-10}" y="${y-23}" fill="red" class="4g-text">4G</text>`
-    };
+    }
     function stationNameTemplate(x,y,name,title){
         let textTag = document.createElementNS('http://www.w3.org/2000/svg', 'text');
         textTag.setAttributeNS(null,'x',x+27);
@@ -39,46 +69,21 @@ const stations =  function () {
         let text = document.createTextNode(title);
         textTag.appendChild(text);
         return textTag
-        //return `<text x="${x+27}" y="${y}" fill="red" class="station-name" data-station-name="${name}">${title}</text>`
-    };
-    function openStationCircle(cx,cy,name,id){
-        let circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-        circle.setAttributeNS(null,'cx',cx);
-        circle.setAttributeNS(null,'cy',cy);
-        circle.setAttributeNS(null,'r','20');
-        circle.setAttributeNS(null,'fill','white');
-        circle.setAttributeNS(null,'data-name','name');
-        circle.setAttributeNS(null,'data-id','id');
-        circle.classList.add('open-4g', 'station-circle');
-        return circle;
-    };
+    }
+    function openStationCircle(cx,cy,name,id, index){
+        let circle = s.circle(cx, cy, 1);
+        console.log(circle);
+        circle.attr({
+            'fill':'#ffffff',
+            'data-name': name,
+            'data-id':id,
+            class:'open-4g station-circle'
+        });
+        setTimeout(()=>{
+            circle.animate({r: 20}, 1000, mina.bounce);
+        }, index*200);
 
-    let mapSvg = document.getElementById('mapSvg');
-
-    return {
-        render(){
-            return new Promise((resolve, reject)=>{
-                getAllStations().then(res=>{
-                    let readyCords = [];
-                    res.forEach(item=>{
-                        let stationCircle = $(`[data-name=${item.slug}]`);
-                        if (stationCircle.length){
-                            const inst = stationCircle[0];
-                            const instCords = {x: +inst.getAttribute('cx') , y: +inst.getAttribute('cy')};
-                            mapSvg.appendChild(stationNameTemplate(instCords.x, instCords.y, item.slug, item.title));
-                            if (item.status==='ready'){
-                                stationCircle.remove();
-                                mapSvg.appendChild(openStationCircle(instCords.x, instCords.y, item.slug, item.id) );
-                                mapSvg.appendChild(openStation4gLabel(instCords.x, instCords.y) );
-                                readyCords.push({x:instCords.x, y: instCords.y})
-                            }
-                        }
-                    });
-                    resolve(readyCords)
-                });
-            });
-        },
     }
 
 };
-module.exports = stations();
+export default  stations();
