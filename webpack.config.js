@@ -7,6 +7,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MODE = require('yargs').argv.mode;
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
+
 function generateHtmlPlugins (templateDir) {
     const templateFilesAll = fs.readdirSync(path.resolve(__dirname, templateDir));
     const templateFiles = templateFilesAll.filter(val => ~val.indexOf('html') );
@@ -32,6 +33,7 @@ module.exports = {
         './app/styles/style.scss',
         './app/assets/js/app.js',
     ],
+
     output: {
         filename: 'js/index.js',
         path: path.resolve (__dirname, 'build') ,

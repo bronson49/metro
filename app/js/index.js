@@ -1,3 +1,7 @@
+import $ from 'jquery'
+window.$ = window.jquery =  window.jQuery = $;
+import './lib/jquery-ui.min'
+
 import stations from './stations-render.js'
 
 let mapSvg=document.getElementById('mapSvg') ,
