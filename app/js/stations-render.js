@@ -59,6 +59,7 @@ const stations =  function () {
         render(){
             return new Promise((resolve, reject)=>{
                 getAllStations().then(res=>{
+                    let readyCords = [];
                     res.forEach(item=>{
                         let stationCircle = $(`[data-name=${item.slug}]`);
                         if (stationCircle.length){
@@ -68,11 +69,12 @@ const stations =  function () {
                             if (item.status==='ready'){
                                 stationCircle.remove();
                                 mapSvg.appendChild(openStationCircle(instCords.x, instCords.y, item.slug, item.id) );
-                                mapSvg.appendChild(openStation4gLabel(instCords.x, instCords.y) )
+                                mapSvg.appendChild(openStation4gLabel(instCords.x, instCords.y) );
+                                readyCords.push({x:instCords.x, y: instCords.y})
                             }
                         }
                     });
-                    resolve(res)
+                    resolve(readyCords)
                 });
             });
         },

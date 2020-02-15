@@ -1,7 +1,7 @@
 [
 
 {"id":"1","priority":"1","status":"noinfo","slug":"nivki","title":"Нивки","is_show":"1","title_ru":"Нивки","title_en":"Nivki","line":"red","created_at":"2020-02-12 17:28:30","updated_at":"2020-02-12 17:28:30"},
-{"id":"2","priority":"0","status":"noinfo","slug":"akademmistechko","title":"Академмістечко","is_show":"1","title_ru":"Академгородок","title_en":"Akademmistechko","line":"red","created_at":"2020-02-13 16:20:31","updated_at":"2020-02-13 16:20:31"},
+{"id":"2","priority":"0","status":"ready","slug":"akademmistechko","title":"Академмістечко","is_show":"1","title_ru":"Академгородок","title_en":"Akademmistechko","line":"red","created_at":"2020-02-13 16:20:31","updated_at":"2020-02-13 16:20:31"},
 {"id":"3","priority":"0","status":"ready","slug":"zhitomirska","title":"Житомирська","is_show":"1",
   "title_ru":"Житомирская","title_en":"Zhytomyrska","line":"red","created_at":"2020-02-13 16:20:31","updated_at":"2020-02-13 16:20:31"},
 {"id":"4","priority":"0","status":"noinfo","slug":"svyatoshin","title":"Святошин","is_show":"1","title_ru":"Святошин","title_en":"Sviatoshyn","line":"red","created_at":"2020-02-13 16:20:31","updated_at":"2020-02-13 16:20:31"},

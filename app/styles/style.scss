@@ -7,6 +7,8 @@
   width: 100%;
   height: 100vh;
   cursor: grab;
+  position: relative;
+
   .station-circle{
     cursor: pointer;
   }
@@ -19,6 +21,7 @@
 }
 #mapSvg{
   transition: .2s;
+  z-index: 2;
 }
 .line{
   transition: 1s;
@@ -39,6 +42,14 @@
 .text-4g{
     font-weight:900;
   }
+
+#svgTest{
+  position: absolute;
+  z-index: 0;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+}
 @keyframes change_fill {
   0% { fill: #49549E; }
   50% { fill: #cec130; }

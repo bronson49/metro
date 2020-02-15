@@ -2,7 +2,9 @@ import $ from 'jquery'
 window.$ = window.jquery =  window.jQuery = $;
 import './lib/jquery-ui.min'
 
+
 import stations from './stations-render.js'
+import clipStations from './clip-path.js'
 
 let mapSvg=document.getElementById('mapSvg') ,
     mapWrapper=document.getElementById('mapWrapper') ,
@@ -24,8 +26,9 @@ const appMetro = {
         $(mapWrapper).draggable({
             start( event, ui ) {appMetro.setSubscribePopup({})},
         });
-        stations.render().then(res=>{
+        stations.render().then(readyCords=>{
             this.events();
+            clipStations(readyCords).start();
         });
     },
 
